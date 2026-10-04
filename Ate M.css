@@ -1,5 +1,40 @@
-body {
+html, body {
   margin: 0;
+  height: 100%;
+  overflow: hidden;           /* no scrollbars; the stage handles sizing */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ================= STAGE (scales to any screen) ================= */
+
+.stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 1536px;              /* the size the page was designed at */
+  height: 730px;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  transform-origin: center center;
+}
+
+/* phones held upright */
+.rotate-hint {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  background: rgba(60, 0, 80, 0.9);
+  color: #ffd1f5;
+  font-family: "Crimson Text", serif;
+  font-size: 26px;
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  .rotate-hint { display: flex; }
 }
 
 /* background, fixed so it stays while scrolling */
@@ -61,6 +96,7 @@ body {
   top: 150px;
   left: 450px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  width: 414px;
 }
 
 .firstpage h1 {
@@ -369,7 +405,7 @@ body {
 }
 
 .flowerline{
-  width: 5vb;
+  width: 36px;
   height: auto;
   position: fixed;
   left: 100px;
@@ -377,7 +413,7 @@ body {
 }
 
 .bottomflower{
-   width: 20vb;
+  width: 146px;
   height: auto;
   position: fixed;
   left: 300px;
@@ -385,7 +421,7 @@ body {
 }
 
 .arrowtwinks{
-  width: 40vb;
+  width: 292px;
   height: auto;
   position: fixed;
   left: 20px;
@@ -393,7 +429,7 @@ body {
 }
 
 .CLEOME1 {
-  width: 40vb;
+  width: 292px;
   height: auto;
   background-color: rgba(85, 0, 67, 0.722);
   border-radius: 10px;
@@ -673,7 +709,7 @@ body {
 .Miyos,
 .Mamas,
 .Jays {
-  width: 40vb;
+  width: 292px;
   height: auto;
   border-radius: 10px;
   position: relative;
