@@ -1,0 +1,800 @@
+body {
+  margin: 0;
+}
+
+/* background, fixed so it stays while scrolling */
+.frame img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* these used to get "cover" from the global rule */
+.Cat, .Pink, .Purple, .Flower1, .Flower2, .Ribbon1, .Ribbon2 {
+  object-fit: cover;
+}
+
+
+/* ================= PAGES (show / hide) ================= */
+
+.firstpage,
+.secondpage,
+.memoriespage,
+.letterspage,
+.flowerpage {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.firstpage.show,
+.secondpage.show,
+.memoriespage.show,
+.letterspage.show,
+.flowerpage.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* lets the memories page scroll inside its fixed container */
+.memoriespage {
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
+
+
+/* ================= FIRST PAGE ================= */
+
+.hbd {
+  border: solid 5px rgba(242, 192, 255, 0.677);
+  border-style: outset;
+  padding: 120px;
+  border-radius: 30px;
+  background-color: rgba(245, 192, 255, 0.87);
+  position: fixed;
+  top: 150px;
+  left: 450px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.firstpage h1 {
+  color: rgb(141, 2, 141);
+  font-family: "Allison", cursive;
+  font-weight: 590;
+  font-style: normal;
+  font-size: 60px;
+  text-align: center;
+  position: relative;
+  bottom: 160px;
+}
+
+.firstpage h2 {
+  color: rgb(141, 2, 141);
+  font-family: "Crimson Text", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+  top: 130px;
+}
+
+.hbd img {
+  width: 280px;
+  height: auto;
+  position: fixed;
+  left: 642px;
+  top: 255px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hbd img:hover {
+  transform: scale(1.1);
+}
+
+.Cat {
+  width: 250px;
+  height: 250px;
+  position: fixed;
+  top: 430px;
+  left: 350px;
+  z-index: 1;
+}
+
+.Pink {
+  width: 140px;
+  height: 140px;
+  position: fixed;
+  top: 300px;
+  left: 500px;
+  z-index: 1;
+}
+
+.Purple {
+  width: 140px;
+  height: 140px;
+  position: fixed;
+  top: 300px;
+  left: 930px;
+  z-index: 1;
+}
+
+.Flower1 {
+  width: 180px;
+  height: 180px;
+  position: fixed;
+  top: 180px;
+  left: -52px;
+  z-index: -1;
+  transform: rotate(30deg);
+}
+
+.Flower2 {
+  width: 180px;
+  height: 180px;
+  position: fixed;
+  top: 180px;
+  left: 1410px;
+  z-index: -1;
+  transform: rotate(-30deg);
+}
+
+.Ribbon1 {
+  width: 290px;
+  height: 290px;
+  position: fixed;
+  top: -38px;
+  left: 1348px;
+  z-index: -1;
+}
+
+.Ribbon2 {
+  width: 290px;
+  height: 290px;
+  position: fixed;          /* was relative */
+  top: -38px;
+  left: -100px;
+  z-index: -1;
+}
+
+
+/* ================= RISING HEARTS ================= */
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hearts img {
+  position: absolute;
+  top: auto;
+  bottom: -120px;
+  left: var(--x);
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  z-index: auto;
+  opacity: 0;
+}
+
+.hearts.go img {
+  animation:
+    bubbleUp var(--t) ease-out var(--d) forwards,
+    sway 2.5s ease-in-out var(--d) infinite alternate;
+}
+
+@keyframes bubbleUp {
+  0%   { translate: 0 0;      opacity: 0; scale: 0.5; }
+  15%  { opacity: 1; }
+  100% { translate: 0 -130vh; opacity: 0; scale: 1.1; }
+}
+
+@keyframes sway {
+  from { transform: translateX(-15px); }
+  to   { transform: translateX(15px); }
+}
+
+
+/* ================= SECOND PAGE (MENU) ================= */
+
+.menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(3px 0 0 rgb(191, 78, 213))
+          drop-shadow(-3px 0 0 rgb(191, 78, 213))
+          drop-shadow(0 3px 0 rgb(191, 78, 213))
+          drop-shadow(0 -3px 0 rgb(191, 78, 213))
+          drop-shadow(0 14px 18px rgba(59, 14, 84, 0.55));
+}
+
+.heart {
+  width: 420px;
+  height: 390px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 46% 54%;
+  gap: 1px;
+  background-color: rgb(191, 78, 213);
+  clip-path: url(#heartClip);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(218, 71, 255, 0.889);
+  cursor: pointer;
+  transition: background-color 1s ease;
+}
+
+.tile:hover {
+  background-color: rgb(191, 78, 213);
+}
+
+.Memories   { grid-column: 1;     grid-row: 1; }
+.Letters    { grid-column: 2;     grid-row: 1; }
+.FlowerTile { grid-column: 1 / 3; grid-row: 2; padding-bottom: 12px; }
+
+.tile img {
+  position: static;
+  width: 70%;
+  height: auto;
+  z-index: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.FlowerTile img {
+  width: 180px;
+}
+
+.tile:hover img {
+  transform: scale(1.08);
+  animation: shake 0.4s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%   { rotate: 0deg;  translate: 0 0; }
+  20%  { rotate: -6deg; translate: -2px 0; }
+  40%  { rotate: 6deg;  translate: 2px 0; }
+  60%  { rotate: -6deg; translate: -2px 0; }
+  80%  { rotate: 6deg;  translate: 2px 0; }
+  100% { rotate: 0deg;  translate: 0 0; }
+}
+
+
+/* ================= MEMORIES PAGE ================= */
+
+/* title */
+.title {
+  margin: 40px 0 0;
+  text-align: center;
+  font-family: "Allison", cursive;
+  font-weight: 400;
+  font-size: 80px;
+  color: rgb(223, 3, 223);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  margin: 0;
+  text-align: center;
+  font-family: "Crimson Text", serif;
+  font-size: 26px;
+  color: rgb(141, 2, 141);
+}
+
+/* the photos */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;       /* keeps the last row centered */
+  gap: 32px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.photo {
+  width: 220px;
+  padding: 12px 12px 6px;
+  background: rgb(240, 195, 243);
+  border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(59, 14, 84, 0.3);
+  rotate: -3deg;                 /* slight tilt */
+  transition: rotate 0.3s ease, transform 0.3s ease;
+}
+
+.photo:nth-child(even) { rotate: 3deg; }
+.photo:nth-child(3n)   { rotate: -1.5deg; }
+
+.photo:hover {
+  rotate: 0deg;
+  transform: scale(1.08);
+  position: relative;
+  z-index: 2;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;           /* square photos */
+  object-fit: cover;             /* crops to fit, no stretching */
+}
+
+.photo p {
+  margin: 10px 0 4px;
+  text-align: center;
+  font-family: "Crimson Text", serif;
+  font-size: 20px;
+  color: rgb(141, 2, 141);
+}
+
+
+/* ================= FLOWER PAGE ================= */
+
+.Flower {
+  border: solid 5px rgba(218, 71, 255, 0.9);
+  background-color: rgba(218, 71, 255, 0.9);
+  width: 700px;
+  height: 300px;
+  top: 110px;
+  left: 280px;
+  position: fixed;
+  border-style: outset;
+  padding: 120px;
+  border-radius: 20px;
+}
+
+.Flowertxt {
+  color: rgb(255, 255, 255);
+  font-family: "Allison", cursive;
+  font-size: 60px;
+  position: fixed;
+  left: 295px;
+  top: 80px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);  
+}
+
+.flowerline{
+  width: 5vb;
+  height: auto;
+  position: fixed;
+  left: 100px;
+  top: 100px;
+}
+
+.bottomflower{
+   width: 20vb;
+  height: auto;
+  position: fixed;
+  left: 300px;
+  top: 500px;
+}
+
+.arrowtwinks{
+  width: 40vb;
+  height: auto;
+  position: fixed;
+  left: 20px;
+  top: 200px;
+}
+
+.CLEOME1 {
+  width: 40vb;
+  height: auto;
+  background-color: rgba(85, 0, 67, 0.722);
+  border-radius: 10px;
+  position: fixed;
+  left: 900px;
+  top: 200px;
+}
+
+.Caring {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 200px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.Loving {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 255px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.Everlasting {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 310px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.Over {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 365px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.Memorable {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 420px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.Encouraging {
+  font-family: "Allison", cursive;
+  font-size: 30px;
+  position: fixed;
+  left: 380px;
+  top: 475px;
+  background-color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  color: #ffd1f5;
+}
+
+.C {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 320px;
+  top: 200px;
+  background-color: rgb(161, 1, 161);
+  padding: 8px 13px 8px 13px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+}
+
+.L {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 320px;
+  top: 255px;
+  background-color: rgb(161, 1, 161);
+  padding: 8px 14px 8px 14px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+}
+
+.Es {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 320px;
+  top: 310px;
+  background-color: rgb(161, 1, 161);
+  padding: 8px 14px 8px 14px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+}
+
+.O {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 321px;
+  top: 365px;
+  background-color: rgb(161, 1, 161);
+  padding: 8px 12px 8px 12px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+}
+
+.M {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 320px;
+  top: 420px;
+  background-color: rgb(161, 1, 161);
+  padding: 7px 10px 8px 10px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+}
+
+.E {
+  font-family: "Crimson" serif;
+  font-size: 30px;
+  position: fixed;
+  left: 320px;
+  top: 475px;
+  background-color: rgb(161, 1, 161);
+  padding: 8px 14px 8px 14px;
+  border-radius: 5px;
+  color: #ffd1f5;
+  font-weight: bold;
+  text-align: center;
+}
+
+.buk1 {
+  width: 170px;
+  height: auto;
+  position: fixed;
+  left: 270px;
+  top: 460px;
+}
+
+
+/* ================= LETTERS PAGE ================= */
+
+/* the three boxes + the three letters hide/show.
+   "visibility: inherit" (instead of "visible") keeps them hidden
+   whenever the whole letters page is hidden, so they can't block clicks. */
+.picks,
+.firstlettermiyo,
+.secondlettermama,
+.thirdletterjj {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s;   /* 1s = fade time */
+}
+
+.picks.show,
+.firstlettermiyo.show,
+.secondlettermama.show,
+.thirdletterjj.show {
+  opacity: 1;
+  visibility: inherit;
+}
+
+/* ----- the three boxes ----- */
+.picks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.Miyoletter,
+.Mamaletter,
+.JayJayletter {
+  width: 220px;
+  padding: 5px;
+  text-align: center;
+  background-color: rgba(218, 71, 255, 0.9);
+  border: solid 5px rgba(218, 71, 255, 0.9);
+  border-style: outset;
+  border-radius: 20px;
+  box-shadow: 0 10px 22px rgba(59, 14, 84, 0.45);
+  cursor: pointer;
+}
+
+.Miyoletter h1,
+.Mamaletter h1,
+.JayJayletter h1 {
+  margin: 0 0 1px;
+  font-family: "Crimson Text", serif;
+  font-size: 32px;
+  color: black;
+}
+
+.picks img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.picks img:hover {
+  animation: shake 0.4s ease-in-out infinite;
+}
+
+/* ----- the three letter pages ----- */
+
+/* the pink card */
+.Miyo,
+.Mama,
+.Jay {
+  border: solid 5px rgba(218, 71, 255, 0.9);
+  background-color: rgba(218, 71, 255, 0.9);
+  width: 700px;
+  height: 300px;
+  top: 110px;
+  left: 190px;
+  position: fixed;
+  border-style: outset;
+  padding: 120px;
+  border-radius: 20px;
+}
+
+/* name at the top of the card */
+.miyotxt,
+.mamatxt,
+.jaytxt {
+  font-family: "Crimson Text", serif;
+  font-size: 40px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  bottom: 530px;
+  right: 10px;
+}
+
+/* "Letter to ate M" title */
+.miyotxts,
+.mamatxts,
+.jaytxts {
+  font-family: "Allison", cursive;
+  font-size: 60px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  bottom: 620px;
+  left: 230px;
+}
+
+/* the photo */
+.Miyos,
+.Mamas,
+.Jays {
+  width: 40vb;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  right: 110px;
+  bottom: 50px;
+}
+
+/* the letter text */
+.Loremmiyo,
+.Loremmama,
+.Loremjay {
+  font-family: "Crimson Text", serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+  bottom: 620px;
+  left: 150px;
+  font-style: italic;
+  font-size: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: left;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+/* decorations (same on all three letters) */
+.line1 {
+  width: 25vb;
+  height: auto;
+  position: fixed;
+  left: 350px;
+  top: 75px;
+}
+
+.line2 {
+  width: 25vb;
+  height: auto;
+  position: fixed;
+  left: 350px;
+  top: 340px;
+}
+
+.pinkballoon {
+  width: 180px;
+  height: auto;
+  position: fixed;
+  left: 80px;
+  top: 310px;
+  transform: rotate(-10deg);
+}
+
+.pinkcat {
+  width: 120px;
+  height: auto;
+  position: fixed;
+  left: 1080px;
+  top: 480px;
+}
+
+.hart {
+  width: 120px;
+  height: auto;
+  position: fixed;
+  left: 170px;
+  top: 550px;
+}
+
+.star {
+  width: 150px;
+  height: auto;
+  position: fixed;
+  left: 1000px;
+  top: 100px;
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background-color: rgba(218, 71, 255, 0.9);
+  border: 3px solid white;
+  color: white;
+  font-family: "Crimson Text", serif;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(59, 14, 84, 0.35);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* tiny heart on the right */
+.back::after {
+  content: "♥";
+  font-size: 16px;
+  color: #ffd1f5;
+}
+
+.back:hover {
+  background-color: rgb(229, 99, 255);
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.back:hover .arrow {
+  animation: nudge 0.5s ease-in-out infinite alternate;
+}
+
+.back:active {
+  transform: scale(0.95);   /* small press effect when clicked */
+}
+
+@keyframes nudge {
+  to { translate: -5px 0; }
+}
